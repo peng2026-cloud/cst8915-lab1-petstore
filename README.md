@@ -37,11 +37,16 @@ In the architecture it is the only part the user sees, and it holds no business 
 
 ## Challenges and Learnings (Optional)
 
-[To fill in after the deployment]
+**Deployment used**: `petstore-vm`, Standard_B2ls_v2 (2 vCPU / 4 GiB), Ubuntu Server 24.04 LTS, region West US 2, resource group `lab1-petstore-rg`.
+
+- **VM size "not available" in every region.** The default size (D2s_v3) failed with `NotAvailableForSubscription`, and the whole B-series was greyed out in Canada Central, East US and Central US. Two separate things were going on. First, my Azure for Students subscription has an *Allowed resource deployment regions* policy (`southcentralus`, `eastus`, `canadacentral`, `westus`, `westus2`), so Central US would have been rejected at validation even though the size looked selectable there. Second, the create form defaults **Availability options** to *Availability zone / Zone 1* and silently resets it every time the region changes; in West US 2 the error was actually "No zones are supported". After switching to *No infrastructure redundancy required*, the B-Series v2 sizes appeared and I used B2ls_v2, one of the sizes named in the course announcement. Lesson: read the exact error text, because "size unavailable" can mean subscription, policy, or zone.
+- **`localhost` means the browser's machine, not the server.** The Store Front's `fetch()` calls run in the browser on my laptop, so `http://localhost:3030` pointed at my laptop. Replacing both URLs in `OrderForm.vue` with the VM's public IP, and opening ports 3000 and 3030 in the NSG in addition to 8080, fixed it. This is also a Twelve-Factor "Config" violation: the address is hard-coded in source, so every new IP needs a code edit.
+- **Long installs over SSH.** Two SSH sessions were reset in the middle of the package installation. The installs had still completed, but I ran the remaining long steps (Node.js, `npm ci`, `cargo build`) under `nohup` and later kept the three services in a `tmux` session so they survive a dropped connection.
+- **Verifying the queue.** With no consumer in this lab, orders stay in `order_queue`. `sudo rabbitmqctl list_queues name durable messages` showed `durable=true` and the count increasing with each order, and the messages were still there after restarting RabbitMQ, which confirms the durable queue plus persistent messages behave as the Order Service code intends.
 
 ---
 
 ## Acknowledgments
 
 - Lab instructions and source code: `ramymohamed10/26F_Lab1_CST8915`.
-- GenAI declaration: I used Claude (Anthropic) to help me read the service source code and to review the wording of this README, as permitted for labs in this course. The deployment and the demo video are my own work.
+- GenAI declaration: As permitted for labs in this course, I used Claude (Anthropic) as an assistant. It helped me read the service source code, troubleshoot the VM size and region errors, run the installation commands on the VM over SSH, and draft the wording of this README. I created the Azure resources and NSG rules in the portal myself, tested the application, and recorded the demo video myself.
