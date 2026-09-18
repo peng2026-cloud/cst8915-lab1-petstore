@@ -46,6 +46,14 @@ In the architecture it is the only part the user sees, and it holds no business 
 
 ---
 
+## Screenshots
+
+Store Front served from the Azure VM at `http://13.66.159.158:8080`:
+
+![Store Front](screenshots/store-front.png)
+
+---
+
 ## Acknowledgments
 
 - Lab instructions and source code: `ramymohamed10/26F_Lab1_CST8915`.
