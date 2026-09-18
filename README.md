@@ -49,4 +49,4 @@ In the architecture it is the only part the user sees, and it holds no business 
 ## Acknowledgments
 
 - Lab instructions and source code: `ramymohamed10/26F_Lab1_CST8915`.
-- GenAI declaration: As permitted for labs in this course, I used Claude (Anthropic) as an assistant. It helped me read the service source code, troubleshoot the VM size and region errors, explain what each command does, and draft the wording of this README. I created the Azure resources and NSG rules in the portal, ran the installation and start-up commands on the VM, edited `OrderForm.vue`, tested the application, and recorded the demo video myself.
+- GenAI declaration: As permitted for labs in this course, I used Claude (Anthropic) to help me understand the source code, troubleshoot Azure errors, and review the wording of this README; the deployment, testing, and demo video are my own work.
