@@ -1,9 +1,8 @@
 # CST8915 Lab 1: Algonquin Pet Store on Azure VM
 
-**Student Name**: Peng Wang
-**Student ID**: 041107730
-**Course**: CST8915 Full-stack Cloud-native Development
-**Semester**: Fall 2026
+| Student Name | Student ID | Course | Semester |
+|---|---|---|---|
+| Peng Wang | 041107730 | CST8915 Full-stack Cloud-native Development | Fall 2026 |
 
 ---
 
